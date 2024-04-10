@@ -6,6 +6,7 @@ logger = logging.getLogger(__name__)
 import numpy as np
 import soundfile as sf
 import torch
+from .gen_audio import gen_audio
 from io import BytesIO
 
 from infer.lib.audio import load_audio, wav2
@@ -142,6 +143,7 @@ class VC:
             if to_return_protect
             else {"visible": True, "maximum": n_spk, "__type__": "update"}
         )
+    
 
     def vc_single(
         self,
@@ -152,16 +154,26 @@ class VC:
         f0_method,
         file_index,
         file_index2,
+        textbox,
+        speech_rate,
+        language_tts,
+        name,
         index_rate,
         filter_radius,
         resample_sr,
         rms_mix_rate,
         protect,
     ):
+        if len(textbox) > 0:
+            gen_audio(textbox, speech_rate, language_tts, name)
+            input_audio_path = "/home/daotuan/Documents/GO/Demo 1/test RVC audio/gg-cloud/tts_script.mp3"
+
+
         if input_audio_path is None:
             return "You need to upload an audio", None
         f0_up_key = int(f0_up_key)
         try:
+            print("input_audio_path: ", input_audio_path)
             audio = load_audio(input_audio_path, 16000)
             audio_max = np.abs(audio).max() / 0.95
             if audio_max > 1:
