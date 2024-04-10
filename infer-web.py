@@ -872,6 +872,30 @@ with gr.Blocks(title="RVC WebUI") as app:
                                 value="rmvpe",
                                 interactive=True,
                             )
+                        with gr.Column():
+                            # text box to input TTS model
+                            textbox = gr.Textbox(
+                                label="Input text (TTS). Leave empty to use the input audio.",
+                                placeholder="Xin chào",
+                            )
+                            speed_rate_tts = gr.Slider(
+                                minimum=0.5,
+                                maximum=2,
+                                label="Speed rate only for TTS",
+                                value=1,
+                                interactive=True,
+                            )
+                            language_tts = gr.Radio(
+                                label="Language TTS",
+                                choices=["vi-VN", "en-US"],
+                                value="vi-VN",
+                                interactive=True,
+                            )
+                            name_speaker_tts = gr.Dropdown(
+                                label="Name speaker",
+                                choices=["Wavenet-A", "Wavenet-B", "Wavenet-C", "Wavenet-D"],
+                                interactive=True,
+                            )
 
                         with gr.Column():
                             resample_sr0 = gr.Slider(
@@ -918,6 +942,8 @@ with gr.Blocks(title="RVC WebUI") as app:
                                 value=0.75,
                                 interactive=True,
                             )
+
+
                             f0_file = gr.File(
                                 label=i18n(
                                     "F0曲线文件, 可选, 一行一个音高, 代替默认F0及升降调"
@@ -936,6 +962,9 @@ with gr.Blocks(title="RVC WebUI") as app:
                             #     value="E:\\codes\py39\\vits_vc_gpu_train\\logs\\mi-test-1key\\total_fea.npy",
                             #     interactive=True,
                             # )
+                        
+                            
+                # Convert button
                 with gr.Group():
                     with gr.Column():
                         but0 = gr.Button(i18n("转换"), variant="primary")
@@ -955,6 +984,10 @@ with gr.Blocks(title="RVC WebUI") as app:
                                 f0method0,
                                 file_index1,
                                 file_index2,
+                                textbox,
+                                speed_rate_tts,
+                                language_tts,
+                                name_speaker_tts,
                                 # file_big_npy1,
                                 index_rate1,
                                 filter_radius0,
