@@ -24,7 +24,7 @@ def gen_audio(text, speed_rate, language, name):
         input=synthesis_input, voice=voice, audio_config=audio_config
     )
 
-    with open("/home/daotuan/Documents/GO/Demo 1/test RVC audio/gg-cloud/tts_script.mp3", "wb") as out:
+    with open("./tts_script.mp3", "wb") as out:
         out.write(response.audio_content)
         print('Audio content written to file "tts_script.mp3"')
         
