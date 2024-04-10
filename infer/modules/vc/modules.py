@@ -166,7 +166,7 @@ class VC:
     ):
         if len(textbox) > 0:
             gen_audio(textbox, speech_rate, language_tts, name)
-            input_audio_path = "/home/daotuan/Documents/GO/Demo 1/test RVC audio/gg-cloud/tts_script.mp3"
+            input_audio_path = "./tts_script.mp3"
 
 
         if input_audio_path is None:
